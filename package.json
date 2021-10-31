@@ -2,6 +2,9 @@
     "name": "snippet-utilities",
     "displayName": "Snippet Utilities",
     "publisher": "knttnk",
+    "repository": {
+        "url": "https://github.com/knttnk/snippet-utilities"
+    },
     "keywords": [
         "snippet",
         "utilities"
@@ -9,7 +12,7 @@
     "preview": false,
     "description": "Utilities for VSCode snippets.",
     "icon": "image/snippet-utilities-icon-128-128.png",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "SEE LICENSE IN LICENSE.txt",
     "engines": {
         "vscode": "^1.28.0"
