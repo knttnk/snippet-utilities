@@ -12,7 +12,7 @@
     "preview": false,
     "description": "Utilities for VSCode snippets.",
     "icon": "image/snippet-utilities-icon-128-128.png",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "license": "SEE LICENSE IN LICENSE.txt",
     "engines": {
         "vscode": "^1.28.0"

@@ -1,3 +1,10 @@
+// リリースは
+// package.jsonのバージョンを修正
+// README.mdのバージョン情報を追加
+// https://knttnk.visualstudio.com/snippet-utilities の👨‍💼でパーソナルアクセストークンを取得
+// vsce login knttnk
+// vsce publish -p 45qi2bbjehodtgn76e3mcupdbo2iia4fg45anazaejnhw56dbdtq
+
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -89,9 +96,7 @@ export function activate(context: vscode.ExtensionContext) {
 // this method is called when your extension is deactivated
 export function deactivate() { }
 
-
 function snippetizedCode(text: string, editor: vscode.TextEditor) {
-
   let lines = text.split(/\r\n|\r|\n/);
   let ret = "";
   lines.forEach((line) => {
@@ -122,7 +127,8 @@ function snippetizedCode(text: string, editor: vscode.TextEditor) {
       line.split("\\").join("\\".repeat(4));
 
     // " を \" に， $を\\$に入れ替え https://docs.microsoft.com/ja-jp/sql/relational-databases/json/how-for-json-escapes-special-characters-and-control-characters-sql-server?view=sql-server-ver15
-    newLine = newLine.split('"').join('\\"').split('$').join('\\\\$');
+    // タブがあるとスニペット文法のエラーになるので，\tに変える
+    newLine = newLine.split('"').join('\\"').split('\t').join('\\t').split('$').join('\\\\$');
 
     ret = ret + '"' + newLine + '",' + "\n";
   });

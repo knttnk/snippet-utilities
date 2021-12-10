@@ -26,3 +26,7 @@ First release of this extension.
 ### 0.1.0
 
 Now available in older versions of VSCode.
+
+### 0.1.2
+
+Fixed a bug that cause a snippet syntax error when a tab character is in the selected code.
