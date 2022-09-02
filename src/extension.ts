@@ -3,9 +3,15 @@
 // README.mdのバージョン情報を追加
 // https://knttnk.visualstudio.com/snippet-utilities の👨‍💼でパーソナルアクセストークンを取得
 // vsce login knttnk
-// vsce publish -p 45qi2bbjehodtgn76e3mcupdbo2iia4fg45anazaejnhw56dbdtq
+// vsce publish -p token
 
+import { time } from 'console';
 import * as vscode from 'vscode';
+
+function myprint(message: any) {
+  console.log(message);
+  vscode.window.showInformationMessage(String(message))
+}
 
 export function activate(context: vscode.ExtensionContext) {
   let disposablSnippetizeSelection = vscode.commands.registerTextEditorCommand(
@@ -17,15 +23,17 @@ export function activate(context: vscode.ExtensionContext) {
       let snippet = snippetizedString(text, editor);
       let languageId = editor.document.languageId;
 
-      vscode.commands.executeCommand("workbench.action.openSnippets").then(
+      vscode.commands.executeCommand("workbench.action.openSnippets", languageId).then(
         (v) => {
           if (v) {  // スニペットファイルが開かれたら
-            function fallback() {  // なにかに失敗したら自分でやってもらう．
+            function fallback(
+              message = "Failed to update the snippet file. Do you need the snippet copied to the clipboard?",
+            ) {  // なにかに失敗したら自分でやってもらう．
               // スニペットをどうするか聞く
               const copyToClipBoardMessage = "Copy to clipboard";
               const disardMessage = "Discard";
               vscode.window.showInformationMessage(
-                "Failed to update the snippet file. Do you need the snippet copied to the clipboard?",
+                message,
                 copyToClipBoardMessage, disardMessage,
               ).then((return_) => {  // 応答によって動作を決める
                 switch (return_) {
@@ -47,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
               if (editor === undefined) {
                 fallback();
               } else if (fileName !== languageId + ".json") {  // 違う言語が選択されたら
-                fallback();
+                fallback("This file is not a user snippet file of" + languageId + ". Do you need the snippet copied to the clipboard?");
               } else {  // エディターが開いたらペーストする．
                 editor.edit(
                   (edit) => {
@@ -69,7 +77,11 @@ export function activate(context: vscode.ExtensionContext) {
                         // スニペットを選択して編集箇所をわかりやすく
                         editor.selection = new vscode.Selection(position, newPosition);
 
-                        vscode.commands.executeCommand("editor.action.formatSelection");
+                        setTimeout(
+                          () => vscode.commands.executeCommand("editor.action.formatSelection"),
+                          100,
+                        )
+
                       } else {
                         fallback();
                       }
@@ -85,6 +97,7 @@ export function activate(context: vscode.ExtensionContext) {
           }
         },
       );
+
     }
   );
 
