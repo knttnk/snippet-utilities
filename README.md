@@ -41,7 +41,7 @@ Fixed a bug that causes a snippet syntax error when a tab character is in the se
 
 - Fixed [issue #2](https://github.com/knttnk/snippet-utilities/issues/2).
 
-### 0.2.1
+### 0.2.2
 
 - Fixed a problem that prevents from adding a snippet when there are no items in the user snippet file.
 - Fixed some misspellings.
