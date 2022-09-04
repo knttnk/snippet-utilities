@@ -5,7 +5,7 @@ import * as json from "jsonc-parser";
 interface SnippetFileSpec {
     trailingCommaOnLastItem: boolean;
     indentor: string;
-    lastItemEndPosition: vscode.Position;
+    lastItemEndPosition: vscode.Position | null;
     jsonEndPosition: vscode.Position;
 }
 
@@ -28,21 +28,30 @@ export function snippetFileSpec(editor: vscode.TextEditor): SnippetFileSpec {
         }
     );
     const reversedEndOffsets = endOffsets.reverse();
-    const lastItemEndOffset = reversedEndOffsets[1];
-    const lastItemEndPosition = editor.document.positionAt(
-        lastItemEndOffset,
-    );
     const jsonEndPosition = editor.document.positionAt(
         reversedEndOffsets[0],
     );
-    const lastCommaOffset = commaOffsets.reverse()[0];
+    if (endOffsets.length < 2) {
+        return {
+            trailingCommaOnLastItem: false,
+            indentor: indentorString(editor),
+            lastItemEndPosition: null,
+            jsonEndPosition: jsonEndPosition,
+        };
+    } else {
+        const lastItemEndOffset = reversedEndOffsets[1];
+        const lastItemEndPosition = editor.document.positionAt(
+            lastItemEndOffset,
+        );
+        const lastCommaOffset = commaOffsets.reverse()[0];
 
-    return {
-        trailingCommaOnLastItem: lastItemEndOffset < lastCommaOffset,
-        indentor: indentorString(editor),
-        lastItemEndPosition: lastItemEndPosition,
-        jsonEndPosition: jsonEndPosition,
-    };
+        return {
+            trailingCommaOnLastItem: lastItemEndOffset < lastCommaOffset,
+            indentor: indentorString(editor),
+            lastItemEndPosition: lastItemEndPosition,
+            jsonEndPosition: jsonEndPosition,
+        };
+    }
 }
 
 function indentorString(editor: vscode.TextEditor) {
@@ -120,13 +129,13 @@ export function snippetizedString(
     const code = snippetizedLines(text, editor).map(
         (v, i, arr) => (
             snippetSpec.indentor.repeat(3)
-            + '\"'
+            + '"'
             + v
-            + (!trailingCommaOnLastItem && (i === arr.length - 1) ? '\",' : `\"`)
+            + (trailingCommaOnLastItem || (i < (arr.length - 1)) ? '",' : `"`)
         )
     ).join("\n");
     return (
-        + indentor + `"very nice snippet": {\n`
+        indentor + `"very nice snippet": {\n`
         + indentor.repeat(2) + `"prefix": "custom-prefix",\n`
         + indentor.repeat(2) + `"body": [\n`
         + code + `\n`

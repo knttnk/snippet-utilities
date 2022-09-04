@@ -36,3 +36,7 @@ Fixed a bug that cause a snippet syntax error when a tab character is in the sel
 - After adding a snippet, you can now move a focus to the name, `prefix`, and `description` using the tab key.
 - Improved robustness for json comments.
 - Fixed [issue #1](https://github.com/knttnk/snippet-utilities/issues/1).
+
+### 0.2.1
+
+- Fixed [issue #2](https://github.com/knttnk/snippet-utilities/issues/2).

@@ -10,10 +10,6 @@ import * as vscode from 'vscode';
 import { basename } from "path";
 import * as myUtil from "./utils";
 
-function myPrint(message: any) {
-  vscode.window.showInformationMessage(String(message));
-}
-
 
 function fallback(
   snippet: string,
@@ -56,17 +52,17 @@ export function activate(context: vscode.ExtensionContext) {
               const snippetSpec = myUtil.snippetFileSpec(snippetJsonEditor);
               const fallbackSnippet = myUtil.snippetizedString(codeText, codeEditor, snippetSpec);
               if (fileName !== languageId + ".json") {  // 違う言語が選択されたら
-                fallback(fallbackSnippet, "This file is not a user snippet file of" + languageId + ". Do you need the snippet copied to the clipboard?");
+                fallback(fallbackSnippet, "This file is not a user snippet file of " + languageId + ". Do you need the snippet copied to the clipboard?");
                 return;
               }
 
               if (snippetJsonEditor === undefined) {
                 fallback(fallbackSnippet);
               } else {
-                if (!snippetSpec.trailingCommaOnLastItem) {
+                const _pos = snippetSpec.lastItemEndPosition;
+                if (!snippetSpec.trailingCommaOnLastItem && (_pos !== null)) {
                   // 最後のアイテムにあれがなかったコンマがなかった場合
                   // コンマを付け足さなければならない
-                  const _pos = snippetSpec.lastItemEndPosition;
                   await snippetJsonEditor.insertSnippet(
                     new vscode.SnippetString(","),
                     new vscode.Position(
@@ -86,7 +82,6 @@ export function activate(context: vscode.ExtensionContext) {
               }
             } catch (error) {
               fallback(myUtil.snippetizedString(codeText, codeEditor));
-              myPrint(error);
             }
           }
         },
