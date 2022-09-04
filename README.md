@@ -30,3 +30,9 @@ Now available in older versions of VSCode.
 ### 0.1.2
 
 Fixed a bug that cause a snippet syntax error when a tab character is in the selected code.
+
+### 0.2.0
+
+- After adding a snippet, you can now move a focus to the name, `prefix`, and `description` using the tab key.
+- Improved robustness for json comments.
+- Fixed [issue #1](https://github.com/knttnk/snippet-utilities/issues/1).

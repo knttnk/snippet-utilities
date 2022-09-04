@@ -111,15 +111,20 @@ export function snippetizedString(
         jsonEndPosition: new vscode.Position(Infinity, 0),
     },
 ) {
-    const code = snippetizedLines(text, editor).map(
-        (v, i, arr) => snippetSpec.indentor.repeat(3) + '\"' + v + '\",'
-    ).join("\n");
     const {
         trailingCommaOnLastItem,
         indentor,
         lastItemEndPosition,
     } = snippetSpec;
 
+    const code = snippetizedLines(text, editor).map(
+        (v, i, arr) => (
+            snippetSpec.indentor.repeat(3)
+            + '\"'
+            + v
+            + (!trailingCommaOnLastItem && (i === arr.length - 1) ? '\",' : `\"`)
+        )
+    ).join("\n");
     return (
         + indentor + `"very nice snippet": {\n`
         + indentor.repeat(2) + `"prefix": "custom-prefix",\n`
@@ -148,6 +153,11 @@ export function snippetizedSnippetString(
         jsonEndPosition: new vscode.Position(Infinity, 0),
     },
 ): vscode.SnippetString {
+    const {
+        trailingCommaOnLastItem,
+        indentor,
+        lastItemEndPosition,
+    } = snippetSpec;
     const code = snippetizedLines(
         text,
         editor,
@@ -157,13 +167,12 @@ export function snippetizedSnippetString(
         '\\\\t',  // tabReplacer
         '\\\\\\\\' + '\\\$',  // dollarReplacer
     ).map(
-        (v, i, arr) => `\t\t\t"` + v + '",'
+        (v, i, arr) => (
+            `\t\t\t"`
+            + v
+            + (trailingCommaOnLastItem || (i < (arr.length - 1)) ? '",' : `"`)
+        )
     ).join("\n");
-    const {
-        trailingCommaOnLastItem,
-        indentor,
-        lastItemEndPosition,
-    } = snippetSpec;
 
     return new vscode.SnippetString(
         `\t"\${1:very nice snippet}": {\n`

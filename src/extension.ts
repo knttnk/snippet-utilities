@@ -1,12 +1,13 @@
 // リリースは
-// package.jsonのバージョンを修正
+// package.jsonのバージョンを修正 package-lock.json は勝手に更新される
 // README.mdのバージョン情報を追加
 // https://knttnk.visualstudio.com/snippet-utilities の👨‍💼でパーソナルアクセストークンを取得
+// https://code.visualstudio.com/api/working-with-extensions/publishing-extension を参考に，
 // vsce login knttnk
 // vsce publish -p $token
 
 import * as vscode from 'vscode';
-import * as path from "path";
+import { basename } from "path";
 import * as myUtil from "./utils";
 
 function myPrint(message: any) {
@@ -50,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
           if (v) {  // スニペットファイルが開かれたら
             try {
               const snippetJsonEditor = vscode.window.activeTextEditor!;
-              const fileName = path.basename(snippetJsonEditor.document.fileName);
+              const fileName = basename(snippetJsonEditor.document.fileName);
 
               const snippetSpec = myUtil.snippetFileSpec(snippetJsonEditor);
               const fallbackSnippet = myUtil.snippetizedString(codeText, codeEditor, snippetSpec);
