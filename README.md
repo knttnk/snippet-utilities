@@ -21,7 +21,7 @@ This extension contributes the following settings:
 
 ### 0.0.1
 
-First release of this extension.
+The first release of this extension.
 
 ### 0.1.0
 
@@ -29,14 +29,19 @@ Now available in older versions of VSCode.
 
 ### 0.1.2
 
-Fixed a bug that cause a snippet syntax error when a tab character is in the selected code.
+Fixed a bug that causes a snippet syntax error when a tab character is in the selected code.
 
 ### 0.2.0
 
 - After adding a snippet, you can now move a focus to the name, `prefix`, and `description` using the tab key.
-- Improved robustness for json comments.
+- Improved robustness for JSON comments.
 - Fixed [issue #1](https://github.com/knttnk/snippet-utilities/issues/1).
 
 ### 0.2.1
 
 - Fixed [issue #2](https://github.com/knttnk/snippet-utilities/issues/2).
+
+### 0.2.1
+
+- Fixed a problem that prevents from adding a snippet when there are no items in the user snippet file.
+- Fixed some misspellings.
