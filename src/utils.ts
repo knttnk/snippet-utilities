@@ -77,10 +77,9 @@ export function snippetizedLines(
 ) {
     const lines = text.split(/\r\n|\r|\n/);
     let ret: Array<string> = [];
+    const indentor = indentorString(editor);
     lines.forEach((line) => {
         // インデントを\tに置き換え
-        const indentor = indentorString(editor);
-
         let indent = "";
         const indentRegExp = new RegExp("^" + indentor);
         while (indentRegExp.exec(line)?.length ?? 0 > 0) {  // 行頭のインデントがあったら
@@ -148,13 +147,13 @@ export function snippetizedString(
 /**
  * 
  * @param text snippet化するテキスト
- * @param editor テキストがあるファイルのエディター
+ * @param codeEditor テキストがあるファイルのエディター
  * @param snippetSpec 
  * @returns スニペットを貼り付けるための `SnippetString`
  */
 export function snippetizedSnippetString(
     text: string,
-    editor: vscode.TextEditor,
+    codeEditor: vscode.TextEditor,
     snippetSpec: SnippetFileSpec = {
         trailingCommaOnLastItem: false,
         indentor: "\t",
@@ -169,7 +168,7 @@ export function snippetizedSnippetString(
     } = snippetSpec;
     const code = snippetizedLines(
         text,
-        editor,
+        codeEditor,
         "\\\\t",  // indentReplacer
         "\\".repeat(8),  // backslashReplacer
         '\\\\"', // wQuotationReplacer

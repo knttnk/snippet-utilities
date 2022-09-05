@@ -17,8 +17,8 @@ function fallback(
 ) {  // なにかに失敗したら自分でやってもらう．
   // スニペットをどうするか聞く
   const copyToClipBoardMessage = "Copy to clipboard";
-  const discardMessage = "Discard";
-  vscode.window.showInformationMessage(
+  const discardMessage = "Discard";						
+  vscode.window.showInformationMessage(   
     message,
     copyToClipBoardMessage, discardMessage,
   ).then((return_) => {  // 応答によって動作を決める
@@ -74,7 +74,8 @@ export function activate(context: vscode.ExtensionContext) {
                 // スニペットをペースト
                 await snippetJsonEditor.insertSnippet(
                   myUtil.snippetizedSnippetString(
-                    codeText, snippetJsonEditor,
+                    codeText, 
+                    codeEditor,
                     snippetSpec,
                   ),
                   snippetSpec.jsonEndPosition,

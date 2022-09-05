@@ -45,3 +45,7 @@ Fixed a bug that causes a snippet syntax error when a tab character is in the se
 
 - Fixed a problem that prevents from adding a snippet when there are no items in the user snippet file.
 - Fixed some misspellings.
+
+### 0.2.3
+
+- Fixed a problem that indents are not replaced by `\t`.
