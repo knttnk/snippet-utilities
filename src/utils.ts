@@ -17,10 +17,10 @@ export function snippetFileSpec(editor: vscode.TextEditor): SnippetFileSpec {
     json.visit(
         originalSnippetText,
         {
-            onObjectEnd: (offset, length, startLine, startCharacter) => {
+            onObjectEnd: (offset: number, length: number, startLine: number, startCharacter: String) => {
                 endOffsets.push(offset);
             },
-            onSeparator: (character, offset, length, startLine, startCharacter) => {
+            onSeparator: (character: String, offset: number, length: number, startLine: number, startCharacter: String) => {
                 if (character === ",") {
                     commaOffsets.push(offset);
                 }

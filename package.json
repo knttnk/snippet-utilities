@@ -1,76 +1,79 @@
 {
-    "name": "snippet-utilities",
-    "displayName": "Snippet Utilities",
-    "publisher": "knttnk",
-    "repository": {
-        "url": "https://github.com/knttnk/snippet-utilities"
-    },
-    "keywords": [
-        "snippet",
-        "utilities"
+  "name": "snippet-utilities",
+  "displayName": "Snippet Utilities",
+  "publisher": "knttnk",
+  "repository": {
+    "url": "https://github.com/knttnk/snippet-utilities"
+  },
+  "keywords": [
+    "snippet",
+    "utilities"
+  ],
+  "preview": false,
+  "description": "Utilities for VSCode snippets.",
+  "icon": "image/snippet-utilities-icon-128-128.png",
+  "version": "0.2.4",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "engines": {
+    "vscode": "^1.28.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "snippet-utilities.AddSelectionToUserSnippets",
+        "title": "Add selection to user snippets",
+        "shortTitle": "Snippetize selection"
+      }
     ],
-    "preview": false,
-    "description": "Utilities for VSCode snippets.",
-    "icon": "image/snippet-utilities-icon-128-128.png",
-    "version": "0.2.3",
-    "license": "SEE LICENSE IN LICENSE.txt",
-    "engines": {
-        "vscode": "^1.28.0"
-    },
-    "categories": [
-        "Other"
+    "keybindings": [
+      {
+        "command": "snippet-utilities.AddSelectionToUserSnippets",
+        "key": "shift+alt+s"
+      }
     ],
-    "activationEvents": [
-        "*"
-    ],
-    "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "snippet-utilities.AddSelectionToUserSnippets",
-                "title": "Add selection to user snippets",
-                "shortTitle": "Snippetize selection"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "snippet-utilities.AddSelectionToUserSnippets",
-                "key": "shift+alt+s"
-            }
-        ],
-        "menus": {
-            "editor/context": [
-                {
-                    "when": "editorHasSelection",
-                    "command": "snippet-utilities.AddSelectionToUserSnippets",
-                    "group": "snippet-utilities"
-                }
-            ]
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection",
+          "command": "snippet-utilities.AddSelectionToUserSnippets",
+          "group": "snippet-utilities"
         }
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "pretest": "npm run compile && npm run lint",
-        "lint": "eslint src --ext ts",
-        "test": "node ./out/test/runTest.js"
-    },
-    "devDependencies": {
-        "@types/glob": "^7.1.4",
-        "@types/mocha": "^9.0.0",
-        "@types/node": "14.x",
-        "@types/vscode": "^1.28.0",
-        "@typescript-eslint/eslint-plugin": "^4.31.1",
-        "@typescript-eslint/parser": "^4.31.1",
-        "@vscode/test-electron": "^1.6.2",
-        "eslint": "^7.32.0",
-        "glob": "^7.1.7",
-        "mocha": "^9.1.1",
-        "typescript": "^4.4.3"
-    },
-    "dependencies": {
-        "@types/nodemailer": "^6.4.4",
-        "jsonc-parser": "^3.2.0"
+      ]
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.28.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^7.32.0",
+    "generator-code": "^1.7.4",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.1",
+    "typescript": "^4.4.3",
+    "yo": "^4.3.1"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.4",
+    "jsonc-parser": "^3.2.0",
+    "vsce": "^2.15.0"
+  }
 }
