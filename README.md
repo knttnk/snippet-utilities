@@ -53,3 +53,7 @@ Fixed a bug that causes a snippet syntax error when a tab character is in the se
 ### 0.2.4
 
 - If the selected text is empty when "Add selection to user snippets" is executed, the snippet file will be opened, but no snippets will be added. So you can now view and edit the snippet file easily.
+
+### 0.2.5
+
+- Updated some dependencies.

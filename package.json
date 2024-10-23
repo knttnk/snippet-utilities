@@ -12,7 +12,7 @@
   "preview": false,
   "description": "Utilities for VSCode snippets.",
   "icon": "image/snippet-utilities-icon-128-128.png",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "license": "SEE LICENSE IN LICENSE.txt",
   "engines": {
     "vscode": "^1.28.0"
@@ -73,7 +73,7 @@
   },
   "dependencies": {
     "@types/nodemailer": "^6.4.4",
-    "jsonc-parser": "^3.2.0",
-    "vsce": "^2.15.0"
+    "@vscode/vsce": "^3.2.0",
+    "jsonc-parser": "^3.2.0"
   }
 }
